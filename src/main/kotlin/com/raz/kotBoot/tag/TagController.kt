@@ -23,9 +23,9 @@ class TagResource(val service : TagService){
         service.post(tag)
     }
 
-    @PostMapping("/")
-    fun addTagToLink(@RequestParam id: String,@RequestParam linkId: String){
-        service.addTagToLink(linkId,id)
+    @PostMapping("/link/")
+    fun addTagToLink(@RequestParam tagId: String,@RequestParam linkId: String){
+        service.addTagToLink(linkId,tagId)
     }
 
 }

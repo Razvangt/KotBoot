@@ -26,8 +26,8 @@ class LinkService(
         if (result ==  null || result.isEmpty){
             return false
         }
-        if (newLink.workspace_id != null){
-            if (wService.findById(newLink.workspace_id).isEmpty){
+        if (newLink.workspaceId != null){
+            if (wService.findById(newLink.workspaceId).isEmpty){
                 return false
             }
         }
