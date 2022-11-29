@@ -13,7 +13,7 @@ import java.sql.ResultSet
 import java.util.*
 
 class H2TagRepository(private  val jdbcTemplate: NamedParameterJdbcTemplate) : TagRepository{
-    override fun index(): MutableList<TagResponse> = jdbcTemplate.query("SELECT * FROM WORKSPACE",responseMap())
+    override fun index(): MutableList<TagResponse> = jdbcTemplate.query("SELECT * FROM TAG",responseMap())
 
     override fun find(id: TagId) : Either<TagError, Tag> = try {
         val query  = "SELECT * FROM Tag where id = :id"

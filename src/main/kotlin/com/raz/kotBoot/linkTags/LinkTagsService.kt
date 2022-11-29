@@ -1,7 +1,6 @@
 package com.raz.kotBoot.linkTags
 
 import com.raz.kotBoot.link.LinkRepository
-import com.raz.kotBoot.tag.TagRepository
 import org.springframework.stereotype.Service
 
 
@@ -9,15 +8,12 @@ import org.springframework.stereotype.Service
 class LinkTagsService(
     val db : LinkTagsRepository,
     val dbL : LinkRepository,
-    val dbT : TagRepository
     ){
     fun post(linkTags: LinkTags) :  Boolean{
         if(dbL.findById(linkTags.link_id).isEmpty){
            return false
         }
-        if(dbT.findById(linkTags.tag_id).isEmpty){
-            return false
-        }
+
         db.save(linkTags)
         return true
     }

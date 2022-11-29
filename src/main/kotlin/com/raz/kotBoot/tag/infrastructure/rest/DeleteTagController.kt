@@ -14,7 +14,7 @@ class DeleteTagController(private val tagDeleter: TagDeleter) {
     @DeleteMapping("/api/v1/tag/{id}")
     fun execute( @PathVariable id : String): ResponseEntity<String> = try {
         tagDeleter.execute(id)
-        ResponseEntity.ok().body("Created")
+        ResponseEntity.ok().body("Deleted")
     } catch ( exception : InvalidArgumentTagException){
         when(exception){
             is InvalidTagIdException -> ResponseEntity
