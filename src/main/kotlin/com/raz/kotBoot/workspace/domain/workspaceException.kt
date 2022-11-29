@@ -1,4 +1,4 @@
-package com.raz.kotBoot.workspace
+package com.raz.kotBoot.workspace.domain
 
 import java.lang.RuntimeException
 
@@ -12,4 +12,3 @@ data class InvalidWorkspaceNameException(val name : String) : InvalidArgumentWor
 sealed class WorkspaceException(override val message : String, override  val  cause: Throwable? = null) : RuntimeException(message,cause)
 data class WorkspaceNotFoundException(val id: String) : WorkspaceException("There is no workspace with id <$id>")
 
-class WorkspaceNullIdException() : WorkspaceException("Workspace id is null")
