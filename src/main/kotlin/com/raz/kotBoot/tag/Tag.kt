@@ -2,17 +2,14 @@ package com.raz.kotBoot.tag
 
 import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.data.annotation.Id
-import org.springframework.data.jdbc.repository.query.Query
 import org.springframework.data.relational.core.mapping.Table
 import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
-
-interface TagRepository : CrudRepository<Tag, String>{
-    @Query("INSERT INTO  LINK_TAGS (link_id,tag_id) VALUES (:linkId,:tagId)")
-    fun addTagToLink(linkId : String,tagId : String)
-}
+@Repository
+interface TagRepository : CrudRepository<Tag, String>
 
 @Schema(description = "Tag to add to Link")
 @Table("TAG")

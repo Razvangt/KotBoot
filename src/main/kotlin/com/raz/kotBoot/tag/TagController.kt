@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*
 class TagResource(val service : TagService){
     @GetMapping
     fun index() : Iterable<Tag> = service.findTags()
-    @GetMapping("/")
-    fun findTag(@RequestParam id : String) : ResponseEntity<Tag> {
+    @GetMapping("/{id}")
+    fun findTag(@PathVariable id : String) : ResponseEntity<Tag> {
         val  found =  service.findTag(id)
         return  if( found.isPresent ) {
             ResponseEntity.ok(found.get())
@@ -22,10 +22,8 @@ class TagResource(val service : TagService){
     fun post(@RequestBody tag : Tag){
         service.post(tag)
     }
-
-    @PostMapping("/link/")
-    fun addTagToLink(@RequestParam tagId: String,@RequestParam linkId: String){
-        service.addTagToLink(linkId,tagId)
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id :String){
+        service.delete(id)
     }
-
 }
