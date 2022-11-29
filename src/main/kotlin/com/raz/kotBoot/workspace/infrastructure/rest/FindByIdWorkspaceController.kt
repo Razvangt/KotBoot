@@ -3,6 +3,7 @@ package com.raz.kotBoot.workspace.infrastructure.rest
 import com.raz.kotBoot.workspace.application.WorkspaceFinder
 import com.raz.kotBoot.workspace.application.WorkspaceResponse
 import com.raz.kotBoot.workspace.domain.WorkspaceNotFoundError
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@Tag(name = "workspace", description = "Workspaces where you can save links")
 class FindByIdWorkspaceController (private val workspaceFinder: WorkspaceFinder){
     @GetMapping("/api/v1/workspace/{id}")
     fun execute(
