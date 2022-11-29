@@ -1,7 +1,6 @@
 package com.raz.kotBoot.link
 
 import com.raz.kotBoot.linkTags.LinkTagsService
-import com.raz.kotBoot.workspace.WorkspaceService
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -9,7 +8,6 @@ import java.util.*
 @Service
 class LinkService(
     private val db : LinkRepository,
-    private val wService: WorkspaceService,
     private val ltService : LinkTagsService
 ){
     fun findLinks() : Iterable<Link> = db.findAll()
@@ -28,11 +26,7 @@ class LinkService(
         if (result ==  null || result.isEmpty){
             return false
         }
-        if (newLink.workspace_id != null){
-            if (wService.findById(newLink.workspace_id).isEmpty){
-                return false
-            }
-        }
+        //todo check if workspace exist
         db.save(newLink)
         return  true
     }

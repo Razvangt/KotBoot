@@ -7,6 +7,5 @@ interface WorkspaceRepository {
     fun index() : List<WorkspaceResponse>
     fun find(id: WorkspaceId): Either<WorkspaceError,Workspace>
     fun save(name : WorkspaceName)
-
     fun update(workspace: Workspace)
 }

@@ -35,7 +35,15 @@ class H2WorkspaceRepository(private  val jdbcTemplate: NamedParameterJdbcTemplat
     }
 
     override fun update(workspace: Workspace) {
-        TODO("Not yet implemented")
+        MapSqlParameterSource()
+            .addValue("id",workspace.id.value.toString())
+            .addValue("name",workspace.name.value)
+            .let { params ->
+                jdbcTemplate.update(
+                    "UPDATE WORKSPACE SET name = :name WHERE id = :id",
+                    params
+                )
+            }
     }
 
     private  fun mapRow(): RowMapper<Workspace> = RowMapper { rs : ResultSet, _: Int ->

@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v1/workspace")
 class FindByIdWorkspaceController (private val workspaceFinder: WorkspaceFinder){
-    @GetMapping("/{id}")
+    @GetMapping("/api/v1/workspace/{id}")
     fun execute(
         @PathVariable id : String
     ): ResponseEntity<WorkspaceResponse> {
