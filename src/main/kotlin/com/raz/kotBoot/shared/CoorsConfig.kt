@@ -1,15 +1,26 @@
 package com.raz.kotBoot.shared
 
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.filter.CorsFilter
+
 @Configuration
-class DatabaseConfig {
+class Cors {
     @Bean
-    public fun corsConfigurer(): WebMvcConfigurer {
-        return WebMvcConfigurer() {
-    
-            @Override
-            public fun addCorsMappings(CorsRegistry registry): Void {
-                registry.addMapping("/api/v1/").allowedOrigins("http://localhost:8080")
-            }
+    fun corsFilter(): CorsFilter {
+            val corsConfiguration =  CorsConfiguration()
+            corsConfiguration.allowCredentials = true
+            corsConfiguration.allowedOrigins = listOf("http://localhost:4200")
+            corsConfiguration.allowedHeaders = listOf("Origin", "Access-Control-Allow-Origin", "Content-Type",
+                "Accept", "Authorization", "Origin, Accept", "X-Requested-With",
+                "Access-Control-Request-Method", "Access-Control-Request-Headers")
+            corsConfiguration.exposedHeaders = listOf("Origin", "Content-Type", "Accept", "Authorization",
+                "Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
+            corsConfiguration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+            val urlBasedCorsConfigurationSource = UrlBasedCorsConfigurationSource()
+            urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration)
+            return  CorsFilter(urlBasedCorsConfigurationSource)
         }
-    }
 }

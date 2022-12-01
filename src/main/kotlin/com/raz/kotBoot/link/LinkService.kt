@@ -1,6 +1,5 @@
 package com.raz.kotBoot.link
 
-import com.raz.kotBoot.linkTags.LinkTagsService
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -8,7 +7,6 @@ import java.util.*
 @Service
 class LinkService(
     private val db : LinkRepository,
-    private val ltService : LinkTagsService
 ){
     fun findLinks() : Iterable<Link> = db.findAll()
     fun findLinksById(id : String): Optional<Link> {
@@ -31,7 +29,6 @@ class LinkService(
         return  true
     }
     fun delete(id: String) : Boolean{
-        ltService.deleteByLink(id)
         db.deleteById(id)
         TODO("check if Error")
     }
