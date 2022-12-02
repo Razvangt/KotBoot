@@ -7,6 +7,7 @@ import com.raz.kotBoot.tag.domain.TagRepository
 
 class TagUpdater (private val tagRepository: TagRepository) {
     fun execute(id : String,name : String){
+        //TODO(Check Tag Existence)
         Tag(TagId.fromString(id),TagName(name)).let { it ->
             tagRepository.update(it)
         }
