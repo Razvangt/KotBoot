@@ -1,5 +1,6 @@
 package com.raz.kotBoot.shared
 
+import com.raz.kotBoot.link.infrastructure.persistence.H2LinkRepository
 import com.raz.kotBoot.tag.infrastructure.persistence.H2TagRepository
 import com.raz.kotBoot.workspace.infrastructure.persistence.H2WorkspaceRepository
 import org.springframework.context.annotation.Bean
@@ -15,4 +16,6 @@ class DatabaseConfig {
     @Bean
     fun tagRepository(jdbcTemplate: NamedParameterJdbcTemplate) = H2TagRepository(jdbcTemplate)
 
+    @Bean
+    fun linkRepository(jdbcTemplate: NamedParameterJdbcTemplate) = H2LinkRepository(jdbcTemplate)
 }

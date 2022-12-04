@@ -8,6 +8,5 @@ class TagDeleter(private val tagRepository: TagRepository){
         TagId.fromString(id).let {
             tagRepository.delete(it)
         }
-        TODO("Delete Dependency IF EXISTS")
     }
 }

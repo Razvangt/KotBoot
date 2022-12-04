@@ -13,12 +13,12 @@ CREATE TABLE IF NOT EXISTS LINK(
     name varchar(40) NOT NULL,
     url  varchar(300) NOT NULL,
     workspace_id varchar(60),
-    foreign key (workspace_id) references WORKSPACE(id)
+    foreign key (workspace_id) references WORKSPACE(id) on delete cascade
 );
 
 CREATE TABLE IF NOT EXISTS LINK_TAGS(
     link_id varchar(60),
     tag_id varchar(60),
-    foreign key (link_id) references LINK(id),
-    foreign key (tag_id)  references TAG(id)
+    foreign key (link_id) references LINK(id) on delete cascade,
+    foreign key (tag_id)  references TAG(id) on delete cascade
 );

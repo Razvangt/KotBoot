@@ -15,16 +15,11 @@ class DeleteTagController(private val tagDeleter: TagDeleter) {
     fun execute( @PathVariable id : String): ResponseEntity<String> = try {
         tagDeleter.execute(id)
         ResponseEntity.ok().body("Deleted")
-    } catch ( exception : InvalidArgumentTagException){
-        when(exception){
-            is InvalidTagIdException -> ResponseEntity
+    } catch ( exception : InvalidTagIdException){
+             ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("The tag id is not valid")
 
-            is InvalidTagNameException -> ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("The tag name is not valid")
-        }
     }catch (exception : TagException){
         when(exception){
             is TagNotFoundException -> ResponseEntity

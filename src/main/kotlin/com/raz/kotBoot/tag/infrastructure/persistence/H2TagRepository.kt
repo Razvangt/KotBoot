@@ -1,5 +1,6 @@
 package com.raz.kotBoot.tag.infrastructure.persistence
 
+import com.raz.kotBoot.link.domain.LinkId
 import com.raz.kotBoot.shared.Either
 import com.raz.kotBoot.shared.Left
 import com.raz.kotBoot.shared.Right
@@ -35,13 +36,30 @@ class H2TagRepository(private  val jdbcTemplate: NamedParameterJdbcTemplate) : T
             }
     }
 
-    override fun addTagToLinkConnection(tag: TagId, link: TagId) {
-        TODO("Not yet implemented")
+    override fun addTagToLinkConnection(tag: TagId, link: LinkId) {
+        MapSqlParameterSource()
+            .addValue("link_id",link.value.toString())
+            .addValue("tag_id",tag.value.toString())
+            .let { params ->
+                jdbcTemplate.update(
+                    "INSERT LINK_TAGS (link_id,tag_id) VALUES (:link_id,tag_id)",
+                    params
+                )
+            }
     }
 
-    override fun deleteTagToLinkConnection(tag: TagId,link : TagId) {
-        TODO("Not yet implemented")
+    override fun deleteTagToLinkConnection(tag: TagId, link: LinkId) {
+        MapSqlParameterSource()
+            .addValue("link_id",link.value.toString())
+            .addValue("tag_id",tag.value.toString())
+            .let { params ->
+                jdbcTemplate.update(
+                    "DELETE FROM LINK_TAGS WHERE link_id = :link_id AND tag_id = :tag_id",
+                    params
+                )
+            }
     }
+
 
     override fun update(tag: Tag) {
         MapSqlParameterSource()
