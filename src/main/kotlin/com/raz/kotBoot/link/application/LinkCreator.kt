@@ -1,16 +1,15 @@
 package com.raz.kotBoot.link.application
 
-import com.raz.kotBoot.link.domain.LinkId
-import com.raz.kotBoot.link.domain.LinkName
-import com.raz.kotBoot.link.domain.LinkRepository
-import com.raz.kotBoot.link.domain.LinkUrl
+import com.raz.kotBoot.link.domain.*
 
 class LinkCreator(private val  db : LinkRepository) {
     fun execute(name : String , url : String, workspaceId : String) {
-        PostLink(LinkName(name),LinkUrl(url),LinkId.fromString(workspaceId)).let {
+        val workspace = WorkspaceId.fromString(workspaceId)
+        db.checkWorkspaceExists(workspace)
+        PostLink(LinkName(name),LinkUrl(url),workspace).let {
             db.save(it)
         }
     }
 }
 
-data class PostLink(val  name: LinkName, val url: LinkUrl, val workspaceId: LinkId)
+data class PostLink(val  name: LinkName, val url: LinkUrl, val workspaceId: WorkspaceId)

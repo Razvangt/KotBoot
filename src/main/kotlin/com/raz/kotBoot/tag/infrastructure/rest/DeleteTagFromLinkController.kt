@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @Tag(name = "tag", description = "type of tags you can have and add to Links")
-class DeleteTagFromLinkController (val delete : DeleteTagLinkConnection) {
+class DeleteTagFromLinkController (private val delete : DeleteTagLinkConnection) {
     @DeleteMapping("/api/v1/tag/{id}/link/{linkId}")
     fun execute( @PathVariable id : String,@PathVariable linkId : String): ResponseEntity<String> = try {
         delete.execute(id,linkId)

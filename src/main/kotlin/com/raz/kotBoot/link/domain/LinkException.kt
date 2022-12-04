@@ -6,7 +6,8 @@ import java.lang.RuntimeException
 sealed class InvalidArgumentLinkException(override val message : String,override  val cause : Throwable? = null) : IllegalArgumentException(message, cause)
 
 
-data class InvalidLinkIdException(val id : String, override val cause: Throwable?) : InvalidArgumentLinkException("The id <$id> is not a valid workspace id",cause)
+data class InvalidLinkIdException(val id : String, override val cause: Throwable?) : InvalidArgumentLinkException("The id <$id> is not a valid link id",cause)
+data class InvalidWorkspaceIdException(val id : String, override val cause: Throwable?) : InvalidArgumentLinkException("The id <$id> is not a valid workspace id",cause)
 data class InvalidLinkNameException(val name : String) : InvalidArgumentLinkException("The name <$name> is not a valid workspace name")
 
 data class InvalidLinkUrlException(val name : String) : InvalidArgumentLinkException("The url <$name> is not a valid link url")

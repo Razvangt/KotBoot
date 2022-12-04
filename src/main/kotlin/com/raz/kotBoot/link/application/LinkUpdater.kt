@@ -1,29 +1,18 @@
 package com.raz.kotBoot.link.application
 
 import com.raz.kotBoot.link.domain.*
-import com.raz.kotBoot.workspace.domain.WorkspaceId
-import com.raz.kotBoot.workspace.domain.WorkspaceRepository
 
 class LinkUpdater(
-    private val  db : LinkRepository,
-    private val  dbW : WorkspaceRepository
+    private val  db : LinkRepository
 ) {
     fun execute(id: String,name : String , url : String, workspaceId : String){
+        val workspace = WorkspaceId.fromString(workspaceId)
         val linkId =  LinkId.fromString(id)
         checkIfExists(linkId)
-        checkIfExistsWorkspaceId(workspaceId)
-        Link(linkId,LinkName(name), LinkUrl(url),LinkId.fromString(workspaceId)).let {
+        db.checkWorkspaceExists(workspace)
+        Link(linkId,LinkName(name), LinkUrl(url),workspace).let {
             db.update(it)
         }
-    }
-
-    private fun checkIfExistsWorkspaceId(workspaceId: String) {
-        dbW.find(WorkspaceId.fromString(workspaceId)).fold(
-            ifRight = {},
-            ifLeft = {
-                throw WorkspaceInLinkNotFoundException(workspaceId)
-            }
-        )
     }
 
     private fun checkIfExists(id: LinkId) {

@@ -10,4 +10,5 @@ interface LinkRepository {
     fun delete(id: LinkId)
     fun find(id: LinkId) : Either<LinkError,Link>
     fun update(link : Link)
+    fun checkWorkspaceExists(id: WorkspaceId)
 }
